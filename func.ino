@@ -32,16 +32,9 @@ void turnRight(int pwr, float kp, int prd){
   while (millis() - currentMillis < prd) pMove(40 - rightSens.mapRead(), pwr, kp);
 }
 
-void movementToYellowTower(int dist, int pwr, int kp){
-  int distance = dist + 10;
-  while (distance > dist or distance < 10){
-    distance = ultrasonic.read();
-    lineMove(pwr, kp, 6);
-  }
-}
   // Робот вращается до нахождения банки-коробки
 void findTower(int dist) {
-  bot.move(80, -80);
+  bot.move(60, -60);
   int distance = dist + 10;
   while (distance > dist or distance < 10) {
     distance = ultrasonic.read();
@@ -53,7 +46,7 @@ void findTower(int dist) {
 void lineMoveToTower(int dist, int pwr, float kp) {
   int distance = dist + 10;
   while (distance > dist) {
-    distance = distance + (ultrasonic.read() - distance) / 2;
+    distance = ultrasonic.read(); // или distance = ultrasonic.read() (distance + (ultrasonic.read() - distance) / 2)
     lineMove(pwr, kp, 6);
   }
 }
